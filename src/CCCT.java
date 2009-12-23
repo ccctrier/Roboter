@@ -22,17 +22,21 @@
 import javax.microedition.lcdui.Graphics;
 
 import lejos.nxt.*;
+import lejos.robotics.navigation.Pilot;
+import lejos.robotics.navigation.TachoPilot;
 
 public class CCCT
 {
 	static Graphics graphics;
+	static Pilot pilot;
 	
 	public static void main (String[] aArg)
 	{
 		LCD.drawString("CCC - Trier", 0, 0);
+		pilot = new TachoPilot(2.1f, 4.4f, Motor.A, Motor.B, true);
 		
 		//Ultraschall Test: Ausgabe auf Display.
-			UltrasonicSensor usonic = new UltrasonicSensor(SensorPort.S1);
+		UltrasonicSensor usonic = new UltrasonicSensor(SensorPort.S1);
 //			for(int i = 0; i<100; i++)
 //			{
 //				int dist = p.getDistance();
@@ -82,48 +86,21 @@ public class CCCT
 		
 		//Fahre geradeaus und bei einem Hindernis drehe dich
 		if(true) {
-			
-			Motor.A.setSpeed(500);
-			Motor.B.setSpeed(500);
-			Motor.A.forward();
-			Motor.B.forward();	
-			
-			int z = 0;
+			pilot.setMoveSpeed(200);
+			pilot.setTurnSpeed(200);
+			pilot.forward();
 			
 			while(true){
 				
 				if(Button.LEFT.isPressed() || Button.ENTER.isPressed())
 					break;
 				
-				if(z>10)
-					//break;
-				
 				if(usonic.getDistance() < 50) {
 					
-					z++;
-					
-					Motor.A.stop();
-					Motor.B.stop();
-					
-					
-					Motor.A.backward();
-					Motor.B.backward();
-					
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-					}
-					Motor.A.stop();
-					Motor.B.stop();
-					
-					Motor.A.rotate(360);
-					//Motor.B.rotate(-720);
-					
-					Motor.A.stop();
-					Motor.B.stop();
-					
-					Motor.A.forward();
-					Motor.B.forward();		
+					pilot.stop();
+					pilot.travel(-5);
+					pilot.rotate(180);
+					pilot.forward();
 				}
 				try {
 					Thread.sleep(100);
