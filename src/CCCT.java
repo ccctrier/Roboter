@@ -22,9 +22,7 @@ public class CCCT {
 	}
 
 	public static void main(String[] args) {
-
-		Motor.C.forward();
-		Motor.C.rotate(90);
+		Motor.C.rotate(900);
 
 		// CCCT traveler = new CCCT();
 		// traveler.pilot = new DifferentialPilot(2.25f, 5.5f, Motor.C, null);
