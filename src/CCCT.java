@@ -4,9 +4,6 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 
-/**
- * Robot that stops if it hits something before it completes its travel.
- */
 public class CCCT {
 	DifferentialPilot pilot;
 	TouchSensor bump = new TouchSensor(SensorPort.S1);
