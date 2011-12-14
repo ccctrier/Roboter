@@ -18,7 +18,7 @@ public class CCCT {
 		roboterMoving = true;
 		initHead();
 
-		while (pilot.isMoving()) {
+		while (pilot.isMoving() || roboterMoving) {
 			if (bump.isPressed()) {
 				traveler.ninjaMove();
 				break;
@@ -31,6 +31,13 @@ public class CCCT {
 
 		roboterMoving = false;
 		pilot.stop();
+
+		try {
+			Thread.sleep(2300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		pilot.travel(-20, true);
 
 		while (pilot.isMoving()) {
@@ -88,22 +95,25 @@ public class CCCT {
 		Runnable headSensor = new Runnable() {
 			public void run() {
 				UltrasonicSensor usonic = new UltrasonicSensor(SensorPort.S2);
-
+				// int i = 0;
 				while (appRunning || roboterMoving) {
 					if (!roboterMoving) {
 						break;
 					}
 
-					int dist = usonic.getDistance();
-					// LCD.drawString("Distance: " + dist, 0, 0);
+					// i++;
 
-					if (dist <= 100) {
+					int dist = usonic.getDistance();
+					// LCD.drawString("Distance: " + dist + " " + i, 0, 0);
+
+					if (dist <= 20) {
 						// appEnd();
+						// LCD.drawString("Distance: " + dist, 0, 0);
 						traveler.ninjaMove();
 					}
 
 					try {
-						Thread.sleep(500);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
