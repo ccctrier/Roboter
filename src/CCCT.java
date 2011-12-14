@@ -12,7 +12,7 @@ public class CCCT {
 	TouchSensor bump = new TouchSensor(SensorPort.S1);
 
 	public void go() {
-		pilot.travel(-200, true);
+		pilot.travel(20, true);
 		while (pilot.isMoving()) {
 			if (bump.isPressed())
 				pilot.stop();
@@ -22,10 +22,16 @@ public class CCCT {
 	}
 
 	public static void main(String[] args) {
-		Motor.C.rotate(900);
+		Motor.C.rotate(180);
+		Motor.C.rotate(-180);
+		Motor.C.rotate(180);
+		Motor.C.rotate(-180);
 
-		// CCCT traveler = new CCCT();
-		// traveler.pilot = new DifferentialPilot(2.25f, 5.5f, Motor.C, null);
-		// traveler.go();
+		// File file = new File("NyanCatJazz.wav");
+		// Sound.playSample(file, 100);
+
+		CCCT traveler = new CCCT();
+		traveler.pilot = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.B);
+		traveler.go();
 	}
 }
