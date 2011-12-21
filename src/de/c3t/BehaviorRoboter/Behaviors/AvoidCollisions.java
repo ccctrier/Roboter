@@ -1,15 +1,18 @@
 package de.c3t.BehaviorRoboter.Behaviors;
 
 import lejos.nxt.SensorPort;
+import lejos.nxt.TouchSensor;
 import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.subsumption.Behavior;
 import de.c3t.BehaviorRoboter.Main;
 
 public class AvoidCollisions implements Behavior {
 	private UltrasonicSensor usonic;
+	private TouchSensor bump;
 
 	public AvoidCollisions() {
 		usonic = new UltrasonicSensor(SensorPort.S2);
+		bump = new TouchSensor(SensorPort.S1);
 	}
 
 	@Override
@@ -24,7 +27,7 @@ public class AvoidCollisions implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return usonic.getDistance() <= 20; //we want control, if distance < 20
+		return bump.isPressed() || usonic.getDistance() <= 20; //we want control, if distance < 20 or bumper pressed
 	}
 
 }
