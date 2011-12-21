@@ -4,6 +4,7 @@ import lejos.nxt.Motor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
+import de.c3t.BehaviorRoboter.Behaviors.AvoidCollisions;
 import de.c3t.BehaviorRoboter.Behaviors.GoForward;
 
 public class Main {
@@ -12,7 +13,8 @@ public class Main {
 	public static void main(String[] args) {
 		pilot = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.B);
     Behavior b1 = new GoForward();
-    Behavior [] bArray = {b1};
+    Behavior b2 = new AvoidCollisions();
+    Behavior [] bArray = {b1, b2};
     Arbitrator arby = new Arbitrator(bArray);
     arby.start();
 	}
