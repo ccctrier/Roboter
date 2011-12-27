@@ -15,7 +15,7 @@ public class AvoidCollisions implements Behavior {
 	public AvoidCollisions() {
 		usonic = new UltrasonicSensor(SensorPort.S2);
 		bump = new TouchSensor(SensorPort.S1);
-
+		Motor.C.setSpeed(80);
 		Runnable head = new Runnable() {
 			public void run() {
 				while (true) {
