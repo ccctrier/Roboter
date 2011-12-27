@@ -10,6 +10,8 @@ import de.c3t.BehaviorRoboter.Behaviors.ShutdownOnEnter;
 
 public class Main {
 	public static DifferentialPilot pilot;
+	
+	public static boolean isShuttingDown;
 
 	public static void main(String[] args) {
 		pilot = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.B);
