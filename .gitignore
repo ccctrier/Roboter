@@ -3,7 +3,7 @@ bin/
 .classpath
 .DS_Store
 .project
-CCCT.nxd
-CCCT.nxj
+*.nxd
+*.nxj
 *~
 *.class
