@@ -16,6 +16,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		pilot = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.B);
+		pilot.setTravelSpeed(8);
+		pilot.setRotateSpeed(90);
 		Behavior b1 = new GoForward();
 		Behavior b2 = new ListenToSound();
 		Behavior b3 = new AvoidCollisions();
