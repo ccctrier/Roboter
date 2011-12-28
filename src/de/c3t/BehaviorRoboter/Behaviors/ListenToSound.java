@@ -1,5 +1,7 @@
 package de.c3t.BehaviorRoboter.Behaviors;
 
+import java.io.File;
+
 import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.nxt.Sound;
@@ -8,8 +10,9 @@ import lejos.robotics.subsumption.Behavior;
 
 public class ListenToSound implements Behavior {
 	private boolean supressed;
-
+	final File soundFile = new File("exterminate.wav");
 	  public ListenToSound() {
+		    Sound.setVolume(100);
 		    SoundSensor sound = new SoundSensor(SensorPort.S3);
 		    int soundLevel;
 			LCD.clear();
@@ -35,16 +38,16 @@ public class ListenToSound implements Behavior {
 	public void action() {
 		// do this if you have control
 		supressed = true;
-		Sound.beep();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
+		//Sound.beep();
+		//try {
+		//	Thread.sleep(500);
+		//} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Sound.beep();
+		//	e.printStackTrace();
+		//}
+		Sound.playSample(soundFile, 100); // 100 ... volume
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
