@@ -19,8 +19,9 @@ public class AvoidCollisions implements Behavior {
 		Runnable head = new Runnable() {
 			public void run() {
 				while (!Main.isShuttingDown) {
-					Motor.C.rotate(80);
+					Motor.C.rotate(40);
 					Motor.C.rotate(-80);
+					Motor.C.rotate(40);
 				}
 			}
 		};
