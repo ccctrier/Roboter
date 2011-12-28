@@ -32,7 +32,7 @@ public class AvoidCollisions implements Behavior {
 	@Override
 	public void action() {
 		Main.pilot.travel(-20);
-		Main.pilot.rotate(10);
+		Main.pilot.rotate(20);
 	}
 
 	@Override
