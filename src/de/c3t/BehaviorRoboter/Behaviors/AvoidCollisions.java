@@ -31,8 +31,7 @@ public class AvoidCollisions implements Behavior {
 
 	@Override
 	public void action() {
-		Main.pilot.travel(-10);
-		Main.pilot.rotate(160);
+		Main.pilot.arc(10, -80);
 	}
 
 	@Override
