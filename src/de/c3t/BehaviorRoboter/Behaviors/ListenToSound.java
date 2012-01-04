@@ -2,62 +2,48 @@ package de.c3t.BehaviorRoboter.Behaviors;
 
 import java.io.File;
 
-import lejos.nxt.LCD;
-import lejos.nxt.SensorPort;
 import lejos.nxt.Sound;
-import lejos.nxt.SoundSensor;
 import lejos.robotics.subsumption.Behavior;
+import de.c3t.BehaviorRoboter.ClapDetector;
+import de.c3t.BehaviorRoboter.Main;
 
 public class ListenToSound implements Behavior {
-	private boolean supressed;
+	private boolean wantControl = false;
+
 	final File soundFile = new File("exterminate.wav");
-	  public ListenToSound() {
-		    Sound.setVolume(100);
-		    SoundSensor sound = new SoundSensor(SensorPort.S3);
-		    int soundLevel;
-			LCD.clear();
-		    LCD.drawString("Level: ", 0, 0);
-		    soundLevel = sound.readValue();
-		    LCD.drawInt(soundLevel,3,7,0);
-		    try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+	public ListenToSound() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (!Main.isShuttingDown) {
+					try {
+						ClapDetector.waitForClapSoundPattern();
+					} catch (Exception e) {
+					} // grrr, y do you throw ALL Exceptions?
+					wantControl = true;
+				}
 			}
-		    }
-		  
+		}).start();
+	}
 
 	@Override
 	public boolean takeControl() {
-		// never take control until code is finished
-		return false;
+		return wantControl;
 	}
 
 	@Override
 	public void action() {
-		// do this if you have control
-		supressed = true;
-		//Sound.beep();
-		//try {
-		//	Thread.sleep(500);
-		//} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+		wantControl = false;
+		int oldVolume = Sound.getVolume();
+		Sound.setVolume(100);
 		Sound.playSample(soundFile, 100); // 100 ... volume
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Sound.setVolume(oldVolume);
+
+		Main.pilot.rotate(-180);
 	}
 
 	@Override
-	public void suppress() {
-		// stop action when called
-		supressed = true;
-		
+	public void suppress() { // action doesn't run for a long time -> we do not implement this
 	}
 }
