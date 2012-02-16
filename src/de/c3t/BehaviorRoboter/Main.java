@@ -5,6 +5,7 @@ import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 import de.c3t.BehaviorRoboter.Behaviors.AvoidCollisions;
+import de.c3t.BehaviorRoboter.Behaviors.BluetoothBehavior;
 import de.c3t.BehaviorRoboter.Behaviors.GoForward;
 import de.c3t.BehaviorRoboter.Behaviors.ListenToSound;
 import de.c3t.BehaviorRoboter.Behaviors.ShutdownOnEscape;
@@ -19,10 +20,11 @@ public class Main {
 		pilot.setTravelSpeed(8);
 		pilot.setRotateSpeed(90);
 		Behavior b1 = new GoForward();
-		Behavior b2 = new ListenToSound();
+		//Behavior b2 = new ListenToSound();
 		Behavior b3 = new AvoidCollisions();
-		Behavior b4 = new ShutdownOnEscape();
-		Behavior[] bArray = { b1, b2, b3, b4 };
+		Behavior b4 = new BluetoothBehavior();
+		Behavior b5 = new ShutdownOnEscape();
+		Behavior[] bArray = { b1, b3, b4, b5 };
 		Arbitrator arby = new Arbitrator(bArray);
 		arby.start();
 	}
