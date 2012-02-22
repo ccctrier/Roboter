@@ -25,7 +25,7 @@ public class Main {
 		Behavior b4 = new BluetoothBehavior();
 		Behavior b5 = new ShutdownOnEscape();
 		Behavior[] bArray = { b1, b3, b4, b5 };
-		Arbitrator arby = new Arbitrator(bArray);
+		CustomArbitrator arby = new CustomArbitrator(bArray);
 		arby.start();
 	}
 
