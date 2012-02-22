@@ -5,4 +5,7 @@ public class ComunicationConstants {
 	public static final byte forward = 1;
 	public static final byte backward = 2;
 	public static final byte takeControl = 3;
+	public static final byte turnLeft = 4;
+	public static final byte turnRight = 5;
+	public static final byte stop = 6;
 }

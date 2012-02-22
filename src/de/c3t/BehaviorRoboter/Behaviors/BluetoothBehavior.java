@@ -44,11 +44,23 @@ public class BluetoothBehavior implements Behavior {
 							} else if (hasControl) {
 								switch (n) {
 									case ComunicationConstants.forward:
-										Main.pilot.travel(5);
+										Main.pilot.forward();
 										break;
 
 									case ComunicationConstants.backward:
-										Main.pilot.travel(-5);
+										Main.pilot.backward();
+										break;
+
+									case ComunicationConstants.turnLeft:
+										Main.pilot.rotateLeft();
+										break;
+
+									case ComunicationConstants.turnRight:
+										Main.pilot.rotateRight();
+										break;
+										
+									case ComunicationConstants.stop:
+										Main.pilot.stop();
 										break;
 
 									default:
@@ -76,6 +88,7 @@ public class BluetoothBehavior implements Behavior {
 		hasControl = true;
 		while (!supressed)
 			Thread.yield();
+		Main.pilot.stop();
 		hasControl = false;
 	}
 
