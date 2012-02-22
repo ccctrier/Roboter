@@ -66,6 +66,18 @@ public class BluetoothBehavior implements Behavior {
 									case ComunicationConstants.forwadLeft:
 										Main.pilot.arcForward(10);
 										break;
+										
+									case ComunicationConstants.forwadRight:
+										Main.pilot.arcForward(-10);
+										break;
+										
+									case ComunicationConstants.backwardLeft:
+										Main.pilot.arcBackward(10);
+										break;
+										
+									case ComunicationConstants.backwardRight:
+										Main.pilot.arcBackward(-10);
+										break;
 
 									default:
 										break;

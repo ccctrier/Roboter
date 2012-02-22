@@ -9,4 +9,7 @@ public class ComunicationConstants {
 	public static final byte turnRight = 5;
 	public static final byte stop = 6;
 	public static final byte forwadLeft = 7;
+	public static final byte forwadRight = 8;
+	public static final byte backwardLeft = 9;
+	public static final byte backwardRight = 10;
 }
